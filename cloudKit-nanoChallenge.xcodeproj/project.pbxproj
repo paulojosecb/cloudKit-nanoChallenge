@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		2BD0559221FF4E69001CD071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0559121FF4E69001CD071 /* AppDelegate.swift */; };
-		2BD0559421FF4E69001CD071 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0559321FF4E69001CD071 /* ViewController.swift */; };
 		2BD0559721FF4E69001CD071 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0559521FF4E69001CD071 /* Main.storyboard */; };
 		2BD0559A21FF4E69001CD071 /* cloudKit_nanoChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0559821FF4E69001CD071 /* cloudKit_nanoChallenge.xcdatamodeld */; };
 		2BD0559C21FF4E6B001CD071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0559B21FF4E6B001CD071 /* Assets.xcassets */; };
 		2BD0559F21FF4E6B001CD071 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0559D21FF4E6B001CD071 /* LaunchScreen.storyboard */; };
+		8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553221FF6F4100DDED6C /* ListViewController.swift */; };
+		8191553521FF708900DDED6C /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553421FF708900DDED6C /* ItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2BD0558E21FF4E69001CD071 /* cloudKit-nanoChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cloudKit-nanoChallenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD0559121FF4E69001CD071 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2BD0559321FF4E69001CD071 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2BD0559621FF4E69001CD071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2BD0559921FF4E69001CD071 /* cloudKit_nanoChallenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cloudKit_nanoChallenge.xcdatamodel; sourceTree = "<group>"; };
 		2BD0559B21FF4E6B001CD071 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BD0559E21FF4E6B001CD071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BD055A021FF4E6B001CD071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8191553221FF6F4100DDED6C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		8191553421FF708900DDED6C /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				2BD0559121FF4E69001CD071 /* AppDelegate.swift */,
-				2BD0559321FF4E69001CD071 /* ViewController.swift */,
+				8191553221FF6F4100DDED6C /* ListViewController.swift */,
+				8191553421FF708900DDED6C /* ItemViewController.swift */,
 				2BD0559521FF4E69001CD071 /* Main.storyboard */,
 				2BD0559B21FF4E6B001CD071 /* Assets.xcassets */,
 				2BD0559D21FF4E6B001CD071 /* LaunchScreen.storyboard */,
@@ -139,8 +142,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BD0559A21FF4E69001CD071 /* cloudKit_nanoChallenge.xcdatamodeld in Sources */,
-				2BD0559421FF4E69001CD071 /* ViewController.swift in Sources */,
+				8191553521FF708900DDED6C /* ItemViewController.swift in Sources */,
 				2BD0559221FF4E69001CD071 /* AppDelegate.swift in Sources */,
+				8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +291,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VA7DWMQ39T;
+				DEVELOPMENT_TEAM = S7LBWA3M99;
 				INFOPLIST_FILE = "cloudKit-nanoChallenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,7 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VA7DWMQ39T;
+				DEVELOPMENT_TEAM = S7LBWA3M99;
 				INFOPLIST_FILE = "cloudKit-nanoChallenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
