@@ -10,22 +10,23 @@ import Foundation
 import CloudKit
 import CoreData
 
-class List: CKManagedObject {
-    var recordType: String?
+extension List: CKManagedObject {
+//    var recordType: String?
+//
+//    var recordName: String?
+//    var recordID: Data?
+//    var lastUpdate: Data?
+//
+//    var name : String
+//    var user : String?
     
-    var recordName: String?
-    var recordID: Data?
-    var lastUpdate: Data?
+//    init(withName name: String) {
+//        self.name = name
+//        self.createCKRecord()
+//    }
     
-    var name : String
-    var user : String?
-    
-    init(withName name: String) {
-        self.name = name
-        self.createCKRecord()
-    }
-    
-    required init(from record: CKRecord) {
+    convenience init(from record: CKRecord) {
+        self.init()
         self.name = record.value(forKey: "name") as! String
         self.recordName = record.recordID.recordName
         let recordID = record.recordID
@@ -41,7 +42,9 @@ class List: CKManagedObject {
             if let result = result {
                 record = result
             }
-            record["name"] = self.name as CKRecordValue
+            if let name = self.name {
+                record["name"] = name as CKRecordValue
+            }
 //            record["user"] = self.user as CKRecordValue
             completion(record)
         }
