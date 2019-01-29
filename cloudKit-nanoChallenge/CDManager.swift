@@ -10,36 +10,38 @@ import UIKit
 import CoreData
 
 // Singleton to handle and manage core data
-class CoreDataManager: NSObject {
-    var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+class CDManager: NSObject {
     
-    public func saveList(name: String) -> List? {
-        guard let list = NSEntityDescription.insertNewObject(forEntityName: "List", into: self.context) as? List else {
+    static var context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    static public func saveList(name: String) -> List? {
+        guard let list = NSEntityDescription.insertNewObject(forEntityName: "List", into: CDManager.context) as? List else {
             return nil
         }
         list.name = name
-        try? context.save()
+        try? CDManager.context.save()
         
         return list
     }
     
-    public func getLists() -> [List]? {
+    static public func getLists() -> [List]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "List")
         do {
-            let lists = try context.fetch(request) as! [List]
+            let lists = try CDManager.context.fetch(request) as! [List]
             return lists
         }
         catch {
             fatalError("Failed to fetch: \(error)")
         }
     }
-    public func getList(by name: String) -> List {
+    
+    static public func getList(by name: String) -> List {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "List")
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "name == %@", name)
         
         do {
-            let lists = try context.fetch(request) as! [List]
+            let lists = try CDManager.context.fetch(request) as! [List]
             let list = lists.first
             return list!
         }
@@ -48,62 +50,64 @@ class CoreDataManager: NSObject {
         }
     }
 
-    public func editList(name: String){
+    static public func editList(name: String){
         let list = getList(by: name)
         list.setValuesForKeys(["name" : name])
         
-        try? context.save()
+        try? CDManager.context.save()
     }
     
-    public func deleteList(list: List){
-        context.delete(list)
-        try? context.save()
+    static public func deleteList(list: List){
+        CDManager.context.delete(list)
+        try? CDManager.context.save()
     }
     
-    public func saveItem(to list: List, name: String) -> Item {
-        let item = NSEntityDescription.insertNewObject(forEntityName: "Item", into: self.context) as! Item
+    static public func saveItem(to list: List, name: String) -> Item {
+        let item = NSEntityDescription.insertNewObject(forEntityName: "Item", into: CDManager.context) as! Item
         item.name = name
         item.list = list
         list.addToItens(item)
         
-        try? context.save()
+        try? CDManager.context.save()
         
         return item
     }
-    public func getItens(from list: List) -> [Item]? {
+    
+    static public func getItens(from list: List) -> [Item]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
         //request.fetchLimit = 1
         request.predicate = NSPredicate(format: "list == %@", list)
         
         do {
-            let itens = try context.fetch(request) as! [Item]
+            let itens = try CDManager.context.fetch(request) as! [Item]
             return itens
         }
         catch {
             fatalError("Failed to fetch: \(error)")
         }
     }
-    public func deleteItem(item: Item){
-        context.delete(item)
-        try? context.save()
+    
+    static public func deleteItem(item: Item){
+        CDManager.context.delete(item)
+        try? CDManager.context.save()
     }
-    public func dropListDatabase(){
+    
+    static public func dropListDatabase(){
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "List")
         request.includesPropertyValues = false
         
         do {
-            let items = try context.fetch(request) as! [NSManagedObject]
+            let items = try CDManager.context.fetch(request) as! [NSManagedObject]
             
             for item in items {
-                context.delete(item)
+                CDManager.context.delete(item)
             }
             
             // Save Changes
-            try context.save()
+            try CDManager.context.save()
             
         } catch {
             fatalError("Failed to drop: \(error)")
         }
     }
-    
 }

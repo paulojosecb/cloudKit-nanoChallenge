@@ -30,17 +30,13 @@ class User : CKManagedObject {
         self.recordID = self.ckRecordIDToData(recordID)
     }
     
-    func ckRecord(_ completion: @escaping ((CKRecord) -> Void)) {
-        guard let recordType = self.recordType else { return }
-        var record = CKRecord(recordType: recordType, recordID: self.ckRecordID())
+    func ckRecord() -> CKRecord? {
+        guard let recordType = self.recordType else { return nil }
         
-        CKManager.fetchRecordById(self.ckRecordID()) { (result) in
-            if let result = result {
-                record = result
-            }
-            record["name"] = self.name as CKRecordValue
-            completion(record)
-        }
+        let record = CKRecord(recordType: recordType, recordID: self.ckRecordID())
+        record["name"] = name as CKRecordValue
+        
+        return record
     }
     
     func createCKRecord() {

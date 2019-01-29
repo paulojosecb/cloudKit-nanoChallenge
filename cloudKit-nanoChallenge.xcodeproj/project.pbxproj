@@ -14,7 +14,7 @@
 		2BD0559F21FF4E6B001CD071 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0559D21FF4E6B001CD071 /* LaunchScreen.storyboard */; };
 		8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553221FF6F4100DDED6C /* ListViewController.swift */; };
 		8191553521FF708900DDED6C /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553421FF708900DDED6C /* ItemViewController.swift */; };
-		8191553722006AB300DDED6C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553622006AB300DDED6C /* CoreDataManager.swift */; };
+		8191553722006AB300DDED6C /* CDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553622006AB300DDED6C /* CDManager.swift */; };
 		E50AC4EE22006B1500A09839 /* CKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50AC4ED22006B1500A09839 /* CKManager.swift */; };
 		E50AC4F022006B7F00A09839 /* CKManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50AC4EF22006B7F00A09839 /* CKManagedObject.swift */; };
 		E50AC4F222006E7100A09839 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50AC4F122006E7100A09839 /* List.swift */; };
@@ -34,7 +34,7 @@
 		57FD983622009DF9006E1179 /* cloudKit-nanoChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "cloudKit-nanoChallenge.entitlements"; sourceTree = "<group>"; };
 		8191553221FF6F4100DDED6C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		8191553421FF708900DDED6C /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
-		8191553622006AB300DDED6C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		8191553622006AB300DDED6C /* CDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDManager.swift; sourceTree = "<group>"; };
 		E50AC4ED22006B1500A09839 /* CKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKManager.swift; sourceTree = "<group>"; };
 		E50AC4EF22006B7F00A09839 /* CKManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKManagedObject.swift; sourceTree = "<group>"; };
 		E50AC4F122006E7100A09839 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 				2BD0559121FF4E69001CD071 /* AppDelegate.swift */,
 				8191553221FF6F4100DDED6C /* ListViewController.swift */,
 				8191553421FF708900DDED6C /* ItemViewController.swift */,
-				8191553622006AB300DDED6C /* CoreDataManager.swift */,
+				8191553622006AB300DDED6C /* CDManager.swift */,
 				2BD0559521FF4E69001CD071 /* Main.storyboard */,
 				2BD0559B21FF4E6B001CD071 /* Assets.xcassets */,
 				2BD0559D21FF4E6B001CD071 /* LaunchScreen.storyboard */,
@@ -189,7 +189,7 @@
 				2BD0559221FF4E69001CD071 /* AppDelegate.swift in Sources */,
 				E50AC4F222006E7100A09839 /* List.swift in Sources */,
 				8191553521FF708900DDED6C /* ItemViewController.swift in Sources */,
-				8191553722006AB300DDED6C /* CoreDataManager.swift in Sources */,
+				8191553722006AB300DDED6C /* CDManager.swift in Sources */,
 				8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,7 +344,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.paulocardosob.cloudKit-nanoChallenge-Debora";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.paulocardosob.cloudKit-nanoChallenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -363,7 +363,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.paulocardosob.cloudKit-nanoChallenge-Debora";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.paulocardosob.cloudKit-nanoChallenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

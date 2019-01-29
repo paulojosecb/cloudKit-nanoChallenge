@@ -16,7 +16,7 @@ protocol CKManagedObject {
     var lastUpdate: Data? { get set }
     var recordType: String? { get set }
     
-    func ckRecord(_ completion: @escaping ((CKRecord) -> Void))
+    func ckRecord() -> CKRecord?
     func createCKRecord()
 }
 
