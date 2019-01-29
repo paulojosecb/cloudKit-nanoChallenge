@@ -72,11 +72,26 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         self.list = self.CDManager.getLists()![indexPath.row]
         performSegue(withIdentifier: "itensFromList", sender: self)
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { (action, indexPath) in
             let list = self.CDManager.getLists()![indexPath.row]
             self.CDManager.deleteList(list: list)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
+        let share = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in
+            //
+        }
+        delete.backgroundColor = .red
+        share.backgroundColor = .blue
+        return [delete, share]
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == UITableViewCell.EditingStyle.delete {
+//            let list = self.CDManager.getLists()![indexPath.row]
+//            self.CDManager.deleteList(list: list)
+//            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+//        }
+//    }
 }
