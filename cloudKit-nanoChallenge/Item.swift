@@ -11,42 +11,34 @@ import CloudKit
 import CoreData
 
 extension Item: CKManagedObject {
-//    var recordType : String? = "Item"
-//    var recordName: String?
-//    var recordID: Data?
-//    var lastUpdate: Data?
     
-    //var name : String
-    
-    //    convenience init(witName name: String) {
-    //        self.name = name
-    //        self.createCKRecord()
-    //    }
+    convenience init(withName name: String) {
+        let entity = NSEntityDescription.entity(forEntityName: "Item", in: CDManager.context)!
+        self.init(entity: entity, insertInto: CDManager.context)
+        
+        self.recordType =  "Item"
+        self.name = name
+        self.createCKRecord()
+    }
     
     convenience init(from record: CKRecord) {
-        self.init()
-        self.name = record.value(forKey: "name") as? String
+        let entity = NSEntityDescription.entity(forEntityName: "Item", in: CDManager.context)!
+        self.init(entity: entity, insertInto: CDManager.context)
+        
+        self.name = record.value(forKey: "name") as! String
         self.recordName = record.recordID.recordName
         self.recordType =  "Item"
         let recordID = record.recordID
         self.recordID = self.ckRecordIDToData(recordID)
     }
-    
-    func ckRecord(_ completion: @escaping ((CKRecord) -> Void)) {
-        guard let recordType = self.recordType else { return }
+
+    func ckRecord() -> CKRecord? {
+        guard let recordType = self.recordType, let name = self.name else { return nil }
         
-        var record = CKRecord(recordType: recordType, recordID: self.ckRecordID())
+        let record = CKRecord(recordType: recordType, recordID: self.ckRecordID())
+        record["name"] = name as CKRecordValue
         
-        CKManager.fetchRecordById(self.ckRecordID()) { (result) in
-            if let result = result {
-                record = result
-            }
-            if let name = self.name {
-                record["name"] = name as CKRecordValue
-            }
-            //            record["user"] = self.user as CKRecordValue
-            completion(record)
-        }
+        return record
     }
     
     func createCKRecord() {

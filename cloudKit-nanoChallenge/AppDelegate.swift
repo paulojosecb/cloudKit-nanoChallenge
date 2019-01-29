@@ -17,14 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         CKManager.iCloudUserID { (token, error) in
-            
-            guard token != nil else {
+            guard let token = token else {
                 print(error?.localizedDescription ?? "NO ERROR")
                 return
             }
-            
+            CKManager.createUser(withName: "Débora")
         }
-        CKManager.createUser(withName: "Alguem")
         // Override point for customization after application launch.
         return true
     }

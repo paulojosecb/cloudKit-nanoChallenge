@@ -76,28 +76,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="listTableView" destination="umr-iK-382" id="EdH-pw-08U"/>
-                        <segue destination="Gm9-xg-ZPE" kind="show" identifier="itensFromList" id="Sl9-cr-brg"/>
+                        <segue destination="rHx-vd-UI1" kind="show" identifier="itensFromList" id="HbL-el-hYk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0HA-2s-5Vp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="826.39999999999998" y="295.50224887556226"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="BEO-vZ-dN5">
-            <objects>
-                <navigationController id="Gm9-xg-ZPE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5aj-Jj-mTM">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="rHx-vd-UI1" kind="relationship" relationship="rootViewController" id="uxS-Sg-la4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UHx-Bq-efc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-127" y="1039"/>
         </scene>
         <!--Itens-->
         <scene sceneID="9Yf-6s-sVh">
@@ -141,11 +125,6 @@
                         <viewLayoutGuide key="safeArea" id="8W5-UD-eNE"/>
                     </view>
                     <navigationItem key="navigationItem" title="Itens" id="5wt-qQ-gUm">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="Z6b-gG-Bf4">
-                            <connections>
-                                <action selector="backToListBtn:" destination="rHx-vd-UI1" id="9sE-ZT-OvB"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cdN-EO-xqg">
                             <connections>
                                 <action selector="addItemBarBtnTapped:" destination="rHx-vd-UI1" id="OPj-Id-9cH"/>
@@ -158,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="056-m3-czP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826" y="1039"/>
+            <point key="canvasLocation" x="826" y="1076"/>
         </scene>
     </scenes>
 </document>
