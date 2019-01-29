@@ -26,7 +26,7 @@ class ListViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "itensFromList",
-            let itemController = segue.destination.children.first as? ItemViewController {
+            let itemController = segue.destination as? ItemViewController {
             itemController.list = self.list!
         }
         let backItem = UIBarButtonItem()
