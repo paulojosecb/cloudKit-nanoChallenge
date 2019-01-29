@@ -19,6 +19,8 @@ class ListViewController: UIViewController {
         self.listTableView.delegate = self
     
         self.listTableView.reloadData()
+        
+        
     }
 
     // MARK: - Navigation
