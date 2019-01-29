@@ -21,7 +21,10 @@ class ListViewController: UIViewController {
     
         self.listTableView.reloadData()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell")
+        cell!.textLabel?.text = ""
+    }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "itensFromList",
@@ -39,17 +42,10 @@ class ListViewController: UIViewController {
             newListTextField.placeholder = "List name"
         }
         let saveAction = UIAlertAction(title: "Create", style: .default) { (action:UIAlertAction) in
-            let listName = newListAlert.textFields?.first?.text!
+            if let listName = newListAlert.textFields?.first?.text {
+                Manager.save(list: listName)
+            }
             
-            //Save Core Data
-            self.list = CDManager.saveList(name: listName!)
-            //Save CloudKit
-            var listCK = List(withName: listName!)
-            CKManager.save(record: listCK.ckRecord(), inDB: CKManager.privateDB, completion: { (record) in
-            //...
-            })
-            
-            print(self.list!.name!)
             self.listTableView.reloadData()
 
         }
@@ -84,14 +80,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { (action, indexPath) in
             let list = CDManager.getLists()![indexPath.row]
             
-            //Delete from Core Data
-            CDManager.deleteList(list: list)
-            //Delete from Cloudkit
-            if let listRecord = list.ckRecord() {
-                CKManager.delete(record: listRecord, inDB: CKManager.privateDB, completion: { (result) in
-                    //...
-                })
-            }
+            Manager.delete(list: list)
             
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }

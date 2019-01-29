@@ -14,14 +14,13 @@ class CDManager: NSObject {
     
     static var context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    static public func saveList(name: String) -> List? {
+    static public func saveList(name: String) {
         guard let list = NSEntityDescription.insertNewObject(forEntityName: "List", into: CDManager.context) as? List else {
-            return nil
+            fatalError("Error saving to coredata")
         }
         list.name = name
         try? CDManager.context.save()
         
-        return list
     }
     
     static public func getLists() -> [List]? {
@@ -62,15 +61,13 @@ class CDManager: NSObject {
         try? CDManager.context.save()
     }
     
-    static public func saveItem(to list: List, name: String) -> Item {
+    static public func saveItem(to list: List, name: String) {
         let item = NSEntityDescription.insertNewObject(forEntityName: "Item", into: CDManager.context) as! Item
         item.name = name
         item.list = list
         list.addToItens(item)
         
         try? CDManager.context.save()
-        
-        return item
     }
     
     static public func getItens(from list: List) -> [Item]? {

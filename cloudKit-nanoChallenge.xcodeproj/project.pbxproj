@@ -15,6 +15,7 @@
 		8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553221FF6F4100DDED6C /* ListViewController.swift */; };
 		8191553521FF708900DDED6C /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553421FF708900DDED6C /* ItemViewController.swift */; };
 		8191553722006AB300DDED6C /* CDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553622006AB300DDED6C /* CDManager.swift */; };
+		819155392200E85B00DDED6C /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819155382200E85B00DDED6C /* Manager.swift */; };
 		E50AC4EE22006B1500A09839 /* CKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50AC4ED22006B1500A09839 /* CKManager.swift */; };
 		E50AC4F022006B7F00A09839 /* CKManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50AC4EF22006B7F00A09839 /* CKManagedObject.swift */; };
 		E50AC4F222006E7100A09839 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50AC4F122006E7100A09839 /* List.swift */; };
@@ -35,6 +36,7 @@
 		8191553221FF6F4100DDED6C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		8191553421FF708900DDED6C /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		8191553622006AB300DDED6C /* CDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDManager.swift; sourceTree = "<group>"; };
+		819155382200E85B00DDED6C /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		E50AC4ED22006B1500A09839 /* CKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKManager.swift; sourceTree = "<group>"; };
 		E50AC4EF22006B7F00A09839 /* CKManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKManagedObject.swift; sourceTree = "<group>"; };
 		E50AC4F122006E7100A09839 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				E50AC4F122006E7100A09839 /* List.swift */,
 				E50AC4F322006EBB00A09839 /* Item.swift */,
 				E50AC4F5220074DB00A09839 /* User.swift */,
+				819155382200E85B00DDED6C /* Manager.swift */,
 			);
 			path = "cloudKit-nanoChallenge";
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				2BD0559221FF4E69001CD071 /* AppDelegate.swift in Sources */,
 				E50AC4F222006E7100A09839 /* List.swift in Sources */,
 				8191553521FF708900DDED6C /* ItemViewController.swift in Sources */,
+				819155392200E85B00DDED6C /* Manager.swift in Sources */,
 				8191553722006AB300DDED6C /* CDManager.swift in Sources */,
 				8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */,
 			);
