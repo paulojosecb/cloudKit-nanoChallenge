@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import CoreData
 
 class ItemViewController: UIViewController {
 
     @IBOutlet weak var itemTableView: UITableView!
-    var itens: [String] = []
-    @IBOutlet weak var itensTableView: UITableView!
+    let CDManager: CoreDataManager = CoreDataManager()
+    var itens: [Item]?
+    var list: List = List()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.itemTableView.dataSource = self
         self.itemTableView.delegate = self
+        
+        self.navigationItem.title = "\(list.name!) Itens"
 
     }
+    
     @IBAction func backToListBtn(_ sender: Any) {
       // not working
         // _ = navigationController?.popViewController(animated: true)
@@ -33,9 +38,10 @@ class ItemViewController: UIViewController {
         }
         let saveAction = UIAlertAction(title: "Create", style: .default) { (action:UIAlertAction) in
             let itemName = newItemAlert.textFields?.first?.text!
-            print(itemName!)
-            self.itens.append(itemName!)
-            self.itensTableView.reloadData()
+            let item = self.CDManager.saveItem(to: self.list, name: itemName!)
+            print("List \(self.list.name ?? "www") and item \(item.name ?? "www")")
+            
+            self.itemTableView.reloadData()
             
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
@@ -49,13 +55,23 @@ class ItemViewController: UIViewController {
 
 extension ItemViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.itens.count
+        print(self.CDManager.getItens(from: list)!.count)
+
+        return self.CDManager.getItens(from: list)!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = itemTableView.dequeueReusableCell(withIdentifier: "itemCell")!
-        cell.textLabel?.text = self.itens[indexPath.row]
+        if let itens = self.CDManager.getItens(from: list) {
+            cell.textLabel!.text = itens[indexPath.row].name
+        }
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let item = self.CDManager.getItens(from: self.list)![indexPath.row]
+            self.CDManager.deleteItem(item: item)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
+    }
 }

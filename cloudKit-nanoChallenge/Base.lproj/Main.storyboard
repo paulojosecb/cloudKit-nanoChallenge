@@ -154,7 +154,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="itemTableView" destination="dLG-06-xKA" id="tU8-Fl-jeC"/>
-                        <outlet property="itensTableView" destination="dLG-06-xKA" id="G94-1c-uPs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="056-m3-czP" userLabel="First Responder" sceneMemberID="firstResponder"/>

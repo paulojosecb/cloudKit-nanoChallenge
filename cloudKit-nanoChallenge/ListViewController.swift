@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ListViewController: UIViewController {
 
     @IBOutlet weak var listTableView: UITableView!
-    var list: [String] = []
+    let CDManager: CoreDataManager = CoreDataManager()
+    var list: List?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +26,9 @@ class ListViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == "itensFromList",
-            let itemController = segue.destination.children.first as? ItemViewController, let itemIndex = listTableView.indexPathForSelectedRow?.row
-        {
-            print("segue ok")
-                   }
+            let itemController = segue.destination.children.first as? ItemViewController {
+            itemController.list = self.list!
+        }
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         navigationItem.backBarButtonItem = backItem
@@ -40,8 +41,8 @@ class ListViewController: UIViewController {
         }
         let saveAction = UIAlertAction(title: "Create", style: .default) { (action:UIAlertAction) in
             let listName = newListAlert.textFields?.first?.text!
-            print(listName!)
-            self.list.append(listName!)
+            self.list = self.CDManager.saveList(name: listName!)
+            print(self.list!.name!)
             self.listTableView.reloadData()
 
         }
@@ -56,19 +57,26 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.list.count
+        return self.CDManager.getLists()!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell") as! UITableViewCell
-        cell.textLabel!.text = self.list[indexPath.row]
+        guard let lists = self.CDManager.getLists() else { return cell }
+        let list = lists[indexPath.row]
+        cell.textLabel!.text = list.name
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //let indexPath = listTableView.indexPathForSelectedRow
-        //let currentCell = tableView.cellForRow(at: indexPath!) as! UITableViewCell
-        
+        self.list = self.CDManager.getLists()![indexPath.row]
         performSegue(withIdentifier: "itensFromList", sender: self)
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let list = self.CDManager.getLists()![indexPath.row]
+            self.CDManager.deleteList(list: list)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
     }
 }
