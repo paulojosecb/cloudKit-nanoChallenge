@@ -6,10 +6,10 @@
     </entity>
     <entity name="List" representedClassName="List" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="itens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="list" inverseEntity="Item" syncable="YES"/>
+        <relationship name="itens" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="list" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="List" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="Item" positionX="-54" positionY="-9" width="128" height="75"/>
+        <element name="List" positionX="-63" positionY="-18" width="128" height="75"/>
     </elements>
 </model>

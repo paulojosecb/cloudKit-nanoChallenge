@@ -14,6 +14,7 @@
 		2BD0559F21FF4E6B001CD071 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0559D21FF4E6B001CD071 /* LaunchScreen.storyboard */; };
 		8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553221FF6F4100DDED6C /* ListViewController.swift */; };
 		8191553521FF708900DDED6C /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553421FF708900DDED6C /* ItemViewController.swift */; };
+		8191553722006AB300DDED6C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8191553622006AB300DDED6C /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2BD055A021FF4E6B001CD071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8191553221FF6F4100DDED6C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		8191553421FF708900DDED6C /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		8191553622006AB300DDED6C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				2BD0559121FF4E69001CD071 /* AppDelegate.swift */,
 				8191553221FF6F4100DDED6C /* ListViewController.swift */,
 				8191553421FF708900DDED6C /* ItemViewController.swift */,
+				8191553622006AB300DDED6C /* CoreDataManager.swift */,
 				2BD0559521FF4E69001CD071 /* Main.storyboard */,
 				2BD0559B21FF4E6B001CD071 /* Assets.xcassets */,
 				2BD0559D21FF4E6B001CD071 /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				2BD0559A21FF4E69001CD071 /* cloudKit_nanoChallenge.xcdatamodeld in Sources */,
 				8191553521FF708900DDED6C /* ItemViewController.swift in Sources */,
 				2BD0559221FF4E69001CD071 /* AppDelegate.swift in Sources */,
+				8191553722006AB300DDED6C /* CoreDataManager.swift in Sources */,
 				8191553321FF6F4100DDED6C /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
