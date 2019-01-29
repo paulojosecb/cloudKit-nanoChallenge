@@ -11,6 +11,7 @@ import CloudKit
 import CoreData
 
 extension List: CKManagedObject {
+//    var recordType: String? = "List"
 //    var recordType: String?
 //
 //    var recordName: String?
@@ -29,6 +30,7 @@ extension List: CKManagedObject {
         self.init()
         self.name = record.value(forKey: "name") as! String
         self.recordName = record.recordID.recordName
+        self.recordType =  "Item"
         let recordID = record.recordID
         self.recordID = self.ckRecordIDToData(recordID)
     }

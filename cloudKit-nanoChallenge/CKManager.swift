@@ -13,7 +13,7 @@ import CoreData
 class CKManager {
 
     private static var container : CKContainer {
-        return CKContainer(identifier: "COLOCAR O IDENTIFIER DO CONTAINER AQUI")
+        return CKContainer(identifier: "iCloud.com.thalia.CloudKit-Study")
     }
     
     var customZone: CKRecordZone?
@@ -104,4 +104,109 @@ class CKManager {
             completion(true)
         })
     }
+    
+// a partir daqui código da thalia
+    
+    
+    static func iCloudUserID(completion: @escaping (String?, Error?) -> Void) {
+        
+        container.fetchUserRecordID() { recordID, error in
+            
+            guard let recordID = recordID, error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            completion(recordID.recordName, nil)
+        }
+    }
+    
+    
+    
+    static func fetchAllUsers(completion: @escaping ([User]?, Error?) -> Void) {
+        
+        let query = CKQuery(recordType: "User", predicate: NSPredicate(value: true))
+        
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            
+            guard let records = records, error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            let users = records.map({ (record) -> User in
+                let user = User(from: record)
+                return user
+            })
+            
+            completion(users, nil)
+        }
+        
+    }
+    
+    
+    
+    
+    static func fetchUser(token: String, completion: @escaping (CKRecord?, User?, Error?) -> Void) {
+        
+        let predicate = NSPredicate(format: "token = %@", token)
+        
+        let query = CKQuery(recordType: "User", predicate: predicate)
+        
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            
+            guard let record = records?.first else {
+                completion(nil, nil, error)
+                return
+            }
+            
+            let user = User(from: record)
+            completion(record, user, nil)
+        }
+        
+    }
+    
+    static func fetchUser(id: CKRecord.ID, completion: @escaping (CKRecord?, User?, Error?) -> Void) {
+        
+        let predicate = NSPredicate(format: "recordID = %@", id)
+        
+        let query = CKQuery(recordType: "User", predicate: predicate)
+        
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            
+            guard let record = records?.first else {
+                completion(nil, nil, error)
+                return
+            }
+            
+            let user = User(from: record)
+            completion(record, user, nil)
+        }
+        
+    }
+    
+    
+    static func createUser(withName name: String) {
+        
+        let user = User(withName: name)
+        
+        user.ckRecord { (record) in
+            self.save(record: record, InDataBase: publicDB)
+        }
+        
+    }
+    
+    
+    static func save(record: CKRecord, InDataBase dataBase: CKDatabase){
+        dataBase.save(record) { (record, error) -> Void in
+            guard let record = record else {
+                print("Error saving record: ", error?.localizedDescription)
+                return
+            }
+            print("Successfully saved record", record)
+        }
+    }
+    
+    
+    
 }

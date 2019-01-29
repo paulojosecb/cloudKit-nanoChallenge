@@ -14,6 +14,7 @@ class User : CKManagedObject {
     var recordName: String?
     var recordID: Data?
     var lastUpdate: Data?
+    var recordType: String? = "User"
     
     var name : String
     
