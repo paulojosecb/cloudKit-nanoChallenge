@@ -25,7 +25,8 @@ extension Item: CKManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: "Item", in: CDManager.context)!
         self.init(entity: entity, insertInto: CDManager.context)
         
-        self.name = record.value(forKey: "name") as! String
+        self.name = record.value(forKey: "name") as? String
+        
         self.recordName = record.recordID.recordName
         self.recordType =  "Item"
         let recordID = record.recordID

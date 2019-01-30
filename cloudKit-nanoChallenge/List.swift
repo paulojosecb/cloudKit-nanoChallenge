@@ -22,9 +22,8 @@ extension List: CKManagedObject {
     }
     
     convenience init(from record: CKRecord) {
-//        let entity = NSEntityDescription.entity(forEntityName: "List", in: CDManager.context)!
-//        self.init(entity: entity, insertInto: CDManager.context)
-        self.init(context: CDManager.context)
+        let entity = NSEntityDescription.entity(forEntityName: "List", in: CDManager.context)!
+        self.init(entity: entity, insertInto: CDManager.context)
         
         self.name = record.value(forKey: "name") as! String
         self.recordName = record.recordID.recordName

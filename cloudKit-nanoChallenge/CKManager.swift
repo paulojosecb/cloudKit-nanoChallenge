@@ -90,6 +90,22 @@ class CKManager {
         }
     }
     
+    static func save(item: Item, inList list : List, completion: @escaping ((CKRecord?) -> Void)) {
+        guard let itemRecord = item.ckRecord() else { return }
+        guard let listRecord = list.ckRecord() else { return }
+        
+        let parentReference = CKRecord.Reference(record: listRecord, action: .deleteSelf)
+        itemRecord.setValue(parentReference, forKey: "list")
+        
+        CKManager.publicDB.save(itemRecord) { (saved, error) in
+            guard let saved = saved, error == nil else {
+                print("ERROR! CKManager: Could not save item. \(error!.localizedDescription)")
+                return
+            }
+            completion(saved)
+        }
+    }
+    
     //Pode ser alterado pra ser mais genérico
     static func delete(record: CKRecord, inDB database: CKDatabase, completion: @escaping ((Bool) -> Void)) {
         database.delete(withRecordID: record.recordID, completionHandler: { (recordID, error) in

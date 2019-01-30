@@ -21,11 +21,14 @@ class Manager {
     
     static func save(list listName: String) {
         //Save Core Data
-        let listCK = CDManager.saveList(name: listName)
-        //Save CloudKit
-        CKManager.save(record: listCK.ckRecord(), inDB: CKManager.privateDB, completion: { (record) in
-            //...
-        })
+        CDManager.saveList(name: listName) { (listSaved) in
+            //Save CloudKit
+            if let list = listSaved {
+                CKManager.save(record: list.ckRecord(), inDB: CKManager.privateDB, completion: { (record) in
+                    //...
+                })
+            } else { print("error on saving CK")}
+        }
     }
     
     static func delete(list: List) {
@@ -41,12 +44,16 @@ class Manager {
     
     static func save(item name: String, to list: List) {
         //Save to Core Data
-        CDManager.saveItem(to: list, name: name)
-        //Save to Cloudkit
-        let itemCK = Item(withName: name)
-        CKManager.save(record: itemCK.ckRecord(), inDB: CKManager.publicDB, completion: { (record) in
-            //...
-        })
+        //Save Core Data
+        CDManager.saveItem(to: list, name: name) { (itemSaved) in
+            //Save CloudKit
+            if let item = itemSaved {
+                //Save to Cloudkit
+                CKManager.save(item: item, inList: list, completion: { (record) in
+                    //...
+                })
+            } else { print("error on saving CK")}
+        }
     }
     
     static func delete(item: Item) {

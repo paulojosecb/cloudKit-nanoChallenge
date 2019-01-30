@@ -14,14 +14,18 @@ class CDManager: NSObject {
     
     static var context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    static public func saveList(name: String) -> List{
-        guard let list = NSEntityDescription.insertNewObject(forEntityName: "List", into: CDManager.context) as? List else {
-            fatalError("Error saving to coredata")
+    static public func saveList(name: String, completion: @escaping ((List?) -> Void)) {
+        do {
+            let list = List(withName: name)
+            
+            try context.save()
+            
+            completion(list)
+
+        } catch let error {
+            completion(nil)
+            print(error.localizedDescription)
         }
-        list.name = name
-        try? CDManager.context.save()
-        return list
-        
     }
     
     static public func getLists() -> [List]? {
@@ -62,13 +66,19 @@ class CDManager: NSObject {
         try? CDManager.context.save()
     }
     
-    static public func saveItem(to list: List, name: String) {
-        let item = NSEntityDescription.insertNewObject(forEntityName: "Item", into: CDManager.context) as! Item
-        item.name = name
-        item.list = list
-        list.addToItens(item)
+    static public func saveItem(to list: List, name: String, completion: @escaping ((Item?) -> Void)) {
+        do {
+            let item = Item(withName: name)
+            list.addToItens(item)
         
-        try? CDManager.context.save()
+            try context.save()
+            
+            completion(item)
+            
+        } catch let error {
+            print(error.localizedDescription)
+            completion(nil)
+        }
     }
     
     static public func getItens(from list: List) -> [Item]? {
@@ -80,7 +90,7 @@ class CDManager: NSObject {
             let itens = try CDManager.context.fetch(request) as! [Item]
             return itens
         }
-        catch {
+        catch let error {
             fatalError("Failed to fetch: \(error)")
         }
     }
