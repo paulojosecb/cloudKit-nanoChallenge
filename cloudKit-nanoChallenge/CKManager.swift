@@ -10,10 +10,12 @@ import Foundation
 import CloudKit
 import CoreData
 
+
 class CKManager {
 
     private static var container : CKContainer {
-        return CKContainer(identifier: "iCloud.com.paulocardosob.cloudKit-nanoChallenge-Amanda")
+        return CKContainer(identifier: "iCloud.com.thalia.CloudKit-Study")
+
     }
     
     var customZone: CKRecordZone?
@@ -227,6 +229,38 @@ class CKManager {
             }
         }
     }
+    
+    
+    static func checkStatus(_ completion: @escaping ((Bool) -> Void)) {
+        self.container.accountStatus { (status, error) in
+            switch status {
+            case .available:
+                completion(true)
+            case .couldNotDetermine, .noAccount, .restricted:
+                completion(false)
+            }
+        }
+//        CKContainer.default().accountStatus { (status, error) in
+//            if error != nil {
+//                print("Deu ruim")
+//            } else {
+//                switch status {
+//                case .available:
+////                    self.iCloudUserID(completion: { (recordID, error) in
+////                        guard let recordID = recordID, error == nil else {
+////                            return
+////                        }
+////                    })
+//                case .couldNotDetermine, .noAccount, .restricted:
+//                   return
+//
+//                }
+//            }
+//        }
+    }
+    
+   
+    
 
     
     

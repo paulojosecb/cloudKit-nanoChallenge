@@ -16,12 +16,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        CKManager.iCloudUserID { (token, error) in
-            guard let token = token else {
-                print(error?.localizedDescription ?? "NO ERROR")
-                return
-            }
-            CKManager.createUser(withName: "Débora")
+        CKManager.checkStatus { (status) in
+            if status == true {
+                CKManager.getUser(then: { (user) in
+                    CKManager.createUser(withName: user.name)
+                
+                })
+            } else {
+                print("Não consegui fazer o alert pra dizer que deu ruim")
+        }
+            
+            
+            
+        
+//        CKManager.iCloudUserID { (token, error) in
+//            guard let token = token else {
+//                print(error?.localizedDescription ?? "NO ERROR")
+//                return
+//            }
+        
+        
+        
+        CKManager.createUser(withName: "Débora")
         }
         // Override point for customization after application launch.
         return true

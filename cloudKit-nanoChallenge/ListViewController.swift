@@ -92,6 +92,14 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         return [delete, share]
     }
     
+//extension UIAlertController {
+//        func showAlert() {
+//            let alert = UIAlertController(title: "Error", message: "You aren't logged in", preferredStyle: UIAlertController.Style.alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
+    
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //        if editingStyle == UITableViewCell.EditingStyle.delete {
 //            let list = self.CDManager.getLists()![indexPath.row]
