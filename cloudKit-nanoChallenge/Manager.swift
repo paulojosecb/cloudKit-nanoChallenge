@@ -21,9 +21,8 @@ class Manager {
     
     static func save(list listName: String) {
         //Save Core Data
-        CDManager.saveList(name: listName)
+        let listCK = CDManager.saveList(name: listName)
         //Save CloudKit
-        let listCK = List(withName: listName)
         CKManager.save(record: listCK.ckRecord(), inDB: CKManager.privateDB, completion: { (record) in
             //...
         })

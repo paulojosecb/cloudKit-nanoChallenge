@@ -13,7 +13,7 @@ import CoreData
 class CKManager {
 
     private static var container : CKContainer {
-        return CKContainer(identifier: "IDENTIFIER DO BANCO AQUIIIIIII")
+        return CKContainer(identifier: "iCloud.com.paulocardosob.cloudKit-nanoChallenge-Amanda")
     }
     
     var customZone: CKRecordZone?
