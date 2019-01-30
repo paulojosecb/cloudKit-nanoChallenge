@@ -14,7 +14,7 @@ import CoreData
 class CKManager {
 
     private static var container : CKContainer {
-        return CKContainer(identifier: "iCloud.com.thalia.CloudKit-Study")
+        return CKContainer(identifier: "iCloud.com.paulocardosob.cloudKit-nanoChallenge-Amanda")
 
     }
     
