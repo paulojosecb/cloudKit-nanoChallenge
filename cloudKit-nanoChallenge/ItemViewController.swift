@@ -13,7 +13,7 @@ class ItemViewController: UIViewController {
 
     @IBOutlet weak var itemTableView: UITableView!
     var itens: [Item]?
-    var list: List = List()
+    var list: List!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,10 @@ class ItemViewController: UIViewController {
         self.navigationItem.title = "\(list.name!) Itens"
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        let cell = itemTableView.dequeueReusableCell(withIdentifier: "itemCell")!
+        cell.textLabel?.text = ""
+    }
     
     @IBAction func addItemBarBtnTapped(_ sender: Any) {
         let newItemAlert = UIAlertController(title: "Item name", message: "Please, enter your new item name", preferredStyle: .alert)
@@ -31,19 +35,9 @@ class ItemViewController: UIViewController {
             newItemTextField.placeholder = "Item name"
         }
         let saveAction = UIAlertAction(title: "Create", style: .default) { (action:UIAlertAction) in
-            let itemName = newItemAlert.textFields?.first?.text!
-            
-            //Save to Core Data
-            let item = CDManager.saveItem(to: self.list, name: itemName!)
-            //Save to Cloudkit
-            var itemCK = Item(withName: itemName!)
-            CKManager.save(record: itemCK.ckRecord(), inDB: CKManager.publicDB, completion: { (record) in
-                //...
-            })
-            
-            
-            print("List \(self.list.name ?? "www") and item \(item.name ?? "www")")
-            
+            if let itemName = newItemAlert.textFields?.first?.text {
+                Manager.save(item: itemName, to: self.list)
+            }
             
             self.itemTableView.reloadData()
             
@@ -59,7 +53,6 @@ class ItemViewController: UIViewController {
 
 extension ItemViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(CDManager.getItens(from: list)!.count)
 
         return CDManager.getItens(from: list)!.count
     }
@@ -75,15 +68,7 @@ extension ItemViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             let item = CDManager.getItens(from: self.list)![indexPath.row]
             
-            //Delete from Core Data
-            CDManager.deleteItem(item: item)
-            //Delete From Cloudkit
-            if let itemRecord = item.ckRecord() {
-                CKManager.delete(record: itemRecord, inDB: CKManager.publicDB, completion: { (result) in
-                    //...
-                })
-            }
-            
+            Manager.delete(item: item)
             
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }

@@ -14,7 +14,8 @@ import CoreData
 class CKManager {
 
     private static var container : CKContainer {
-        return CKContainer(identifier: "iCloud.com.thalia.CloudKit-Study")
+        return CKContainer(identifier: "iCloud.com.paulocardosob.cloudKit-nanoChallenge-Amanda")
+
     }
     
     var customZone: CKRecordZone?
@@ -85,6 +86,22 @@ class CKManager {
         database.save(record) { (saved, error) in
             guard let saved = saved, error == nil else {
                 print("ERROR! CKManager: Could not save records. \(error!.localizedDescription)")
+                return
+            }
+            completion(saved)
+        }
+    }
+    
+    static func save(item: Item, inList list : List, completion: @escaping ((CKRecord?) -> Void)) {
+        guard let itemRecord = item.ckRecord() else { return }
+        guard let listRecord = list.ckRecord() else { return }
+        
+        let parentReference = CKRecord.Reference(record: listRecord, action: .deleteSelf)
+        itemRecord.setValue(parentReference, forKey: "list")
+        
+        CKManager.publicDB.save(itemRecord) { (saved, error) in
+            guard let saved = saved, error == nil else {
+                print("ERROR! CKManager: Could not save item. \(error!.localizedDescription)")
                 return
             }
             completion(saved)
